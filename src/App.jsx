@@ -7,6 +7,7 @@ import AddSong from "./Pages/AddSong";
 import ListSong from "./Pages/ListSong";
 import AddAlbum from "./Pages/AddAlbum";
 import ListAlbum from "./Pages/ListAlbum";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -15,11 +16,46 @@ function App() {
         {/* <Toaster position="top-center" reverseOrder={false} /> */}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/add-song" element={<AddSong />} />
-          <Route path="/list-songs" element={<ListSong />} />
-          <Route path="/add-album" element={<AddAlbum />} />
-          <Route path="/list-albums" element={<ListAlbum />} />
-          <Route path="*" element={<AddSong />} />
+          <Route
+            path="/add-song"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AddSong />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/list-songs"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <ListSong />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/add-album"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AddAlbum />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/list-albums"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <ListAlbum />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AddSong />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>

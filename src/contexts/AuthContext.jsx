@@ -1,6 +1,5 @@
 import axios from "axios";
-import React from "react";
-import { createContext, useState, useContext } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { API_BASE_URL } from "../App";
 export const AuthContext = createContext();
 export const useAuth = () => {
@@ -15,7 +14,9 @@ export const AuthContextProvider = ({ children }) => {
   // create state usertoken
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("adminToken"));
+  const [loading, setLoading] = useState(true);
   const login = async (email, password) => {
+    setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
@@ -53,9 +54,10 @@ export const AuthContextProvider = ({ children }) => {
           error.response?.data?.message ||
           "Something went wrong please try again",
       };
+    } finally {
+      setLoading(false);
     }
   };
-  const [loading, setLoading] = useState(false);
   const isAuthenticated = () => {
     return !!token && !!user;
   };
@@ -67,6 +69,7 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("adminUser");
     setUser(null);
     setToken(null);
+    // { "email":"admin@musify.com","role":"ADMIN"}
   };
   const contextValue = {
     user,
@@ -78,12 +81,16 @@ export const AuthContextProvider = ({ children }) => {
     login,
   };
   useEffect(() => {
+    setLoading(true);
     const storedToken = localStorage.getItem("adminToken");
     const storedUser = localStorage.getItem("adminUser");
     if (storedToken && storedUser) {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
     }
+    console.log("inside useeffect of authcontext");
+
+    setLoading(false);
   }, []);
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

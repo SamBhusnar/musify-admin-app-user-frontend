@@ -1,4 +1,3 @@
-export const API_BASE_URL = "http://localhost:8080";
 import Toaster from "react-hot-toast";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

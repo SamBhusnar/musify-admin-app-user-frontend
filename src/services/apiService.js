@@ -1,5 +1,6 @@
 import axios from "axios";
-import { API_BASE_URL } from "../App";
+export const API_BASE_URL = "http://localhost:8080";
+
 // craete axios intance
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -36,6 +37,37 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+export const songsAPI = {
+  add: (FormData) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return apiClient.post(`/api/songs`, FormData, config);
+  },
+  list: () => {
+    return apiClient.get(`/api/songs`);
+  },
+  remove: (id) => {
+    return apiClient.delete(`/api/songs/${id}`);
+  },
+};
+export const albumsAPI = {
+  add: (FormData) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return apiClient.post(`/api/albums`, FormData, config);
+  },
+  list: () => {
+    return apiClient.get(`/api/albums`);
+  },
+  remove: (id) => {
+    return apiClient.delete(`/api/albums/${id}`);
+  },
+};
 
 export default apiClient;

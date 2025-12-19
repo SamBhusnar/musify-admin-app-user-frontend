@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import DashBoard from "../layout/DashBoard";
 
 function AddAlbum() {
   return (
-    <div>AddAlbum</div>
-  )
+    <DashBoard activeMenu="Add Album">
+      <div>Add new album</div>
+    </DashBoard>
+  );
 }
 
-export default AddAlbum
+export default AddAlbum;

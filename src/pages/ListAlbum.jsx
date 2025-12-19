@@ -1,8 +1,11 @@
 import React from 'react'
+import DashBoard from "../layout/DashBoard";
 
 function ListAlbum() {
   return (
-    <div>ListAlbum</div>
+    <DashBoard activeMenu="List Albums">
+      <div>list albums</div>
+    </DashBoard>
   )
 }
 

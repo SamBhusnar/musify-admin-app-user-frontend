@@ -53,6 +53,7 @@ function ProtectedRoute({ children, requireAdmin = false }) {
 
     return <Navigate to="/login" replace />;
   }
+  // console.log("inside in protected route");
 
   return children;
 }

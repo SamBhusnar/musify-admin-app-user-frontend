@@ -1,11 +1,11 @@
 import Toaster from "react-hot-toast";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Pages/Login";
-import AddSong from "./Pages/AddSong";
-import ListSong from "./Pages/ListSong";
-import AddAlbum from "./Pages/AddAlbum";
-import ListAlbum from "./Pages/ListAlbum";
+import Login from ".pages/Login";
+import AddSong from "./pages/AddSong";
+import ListSong from "./pages/ListSong";
+import AddAlbum from "./pages/AddAlbum";
+import ListAlbum from "./pages/ListAlbum";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
